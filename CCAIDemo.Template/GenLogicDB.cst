@@ -1,0 +1,33 @@
+﻿<%@ Template Language="C#" TargetLanguage="C#" Description="An example on creating a class with properties from a database table." %>
+<%@ Property Name="SourceDatabase" Type="SchemaExplorer.DatabaseSchema" Category="" Description="Database containing the tables." %>
+<%@ Assembly Name="SchemaExplorer" %>
+<%@ Import Namespace="SchemaExplorer" %>
+<%@ Assembly Name="CodeSmith.BaseTemplates" %>
+<%@ Import Namespace="CodeSmith.BaseTemplates" %>
+<%@ Assembly Name="CodeSmith.CustomProperties" %>
+<%@ Import Namespace="CodeSmith.CustomProperties" %>
+<%@ Assembly Name="System.Design" %>
+<%@ Import Namespace="System.Design" %>
+<%@ Register Name="SubTemplate" Template="C:\Users\huanglan.it\Documents\visual studio 2010\Projects\CCAIDemo\CCAIDemo.Template\GenLogic.cst" MergeProperties="True" ExcludeProperties="" %>
+<%
+for(int i=0; i<this.SourceDatabase.Tables.Count;i++)
+{
+     SubTemplate  mySub=new SubTemplate();
+    mySub.OutputFile=this.OutputDirectory+@"\"+this.SourceDatabase.Tables[i].Name.Replace("_","")+"Bll.cs";
+    mySub.SourceTable=this.SourceDatabase.Tables[i];
+    mySub.ClassNamespace=this.ClassNamespace;
+    mySub.Render(Response);      
+}
+
+%>
+
+<script runat="template">
+private string _outputDirectory = @"d:\codesmithstudy";
+[Editor(typeof(System.Windows.Forms.Design.FolderNameEditor), typeof(System.Drawing.Design.UITypeEditor)),
+Category("Custom"), Description("Output directory.")]
+public string OutputDirectory
+{
+       get {return _outputDirectory;}
+       set {_outputDirectory= value;}
+}
+</script>

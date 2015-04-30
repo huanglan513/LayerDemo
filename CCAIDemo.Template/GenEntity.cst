@@ -1,0 +1,230 @@
+﻿<%@ Template Language="C#" TargetLanguage="Text" Debug="False" %>
+<%@ Property Name="SourceTable" Type="SchemaExplorer.TableSchema" Category="Context" Description="Table that the object is based on." %>
+<%@ Property Name="SingleFileMode" Type="System.Boolean" Category="Options" Default="True" Description="Generate content for a complete cs file instead of just a class." %>
+<%@ Property Name="ClassNamespace" Type="System.String" Category="Options" Default="BusinessObjects" Description="Namespace your class is in. Only used if SingleFileMode is true!" %>
+<%@ Assembly Name="SchemaExplorer" %>
+<%@ Assembly Name="System.Data" %>
+<%@ Import Namespace="SchemaExplorer" %>
+<%@ Import Namespace="System.Data" %>
+<%@ Map Name="SqlCSharp" Src="Sql-CSharp" Description="System to C# Type Map" %>
+<%@ Map Name="DbDataReader" Src="DbType-DataReaderMethod" Description="DbType to DataReader Method Map" %>
+<%@ Map Name="SqlNativeSqlDb" Src="SqlNativeType-SqlDbType" Description="SqlNativeType to SqlDbType Map" %>
+<%@ Map Name="DbTypeCSharp" Src="DbType-CSharp" Description="DbType to CSharp Map" %>
+<% if(this.SingleFileMode) { %>
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Data;
+
+namespace <%= this.ClassNamespace %>
+{
+<% } %>
+	#region <%= GetClassName(SourceTable) %>
+	/// <summary>
+	/// This object represents the properties and navigation list of a <%= GetClassName(SourceTable) %>.
+	/// </summary>
+	public class <%= GetClassName(SourceTable) %>
+	{
+		
+		public <%= GetClassName(SourceTable) %>()
+		{
+		}
+        
+        #region Public Properties
+        <% if(SourceTable.HasPrimaryKey){ %>
+		public <%= GetPrimaryKeyType(SourceTable) %> <%=SourceTable.PrimaryKey.MemberColumns[0].Name %>
+		{
+			get;
+            set;
+		}
+		<% } %>
+		<% for (int i = 0; i < SourceTable.NonPrimaryKeyColumns.Count; i++) { %>
+		public <%= GetCSharpVariableType(SourceTable.NonPrimaryKeyColumns[i]) %> <%= GetPropertyName(SourceTable.NonPrimaryKeyColumns[i]) %>
+		{
+			get;
+			set;
+		}
+		<% if (i < SourceTable.NonPrimaryKeyColumns.Count - 1) Response.Write("\r\n"); %>		
+		<% } %>
+		#endregion
+        
+        #region Navigation List
+        <% for(int i=0;i<SourceTable.PrimaryKeys.Count;i++){     %>
+        public <%=GetCShartVariableTypeForeignList(SourceTable.PrimaryKeys[i]) %> <%= GetForeignProertyListName(SourceTable.PrimaryKeys[i]) %>
+        {
+            get;
+            set;
+        }
+        <%} %>
+        #endregion
+
+<% if(this.SingleFileMode) { %>
+}
+#endregion
+}
+<% } %>
+<script runat="template">
+public string GetMemberVariableDeclarationStatement(ColumnSchema column)
+{
+	return GetMemberVariableDeclarationStatement("private", column);
+}
+
+public string GetMemberVariableDeclarationStatement(string protectionLevel, ColumnSchema column)
+{
+	string statement = protectionLevel + " ";
+	statement += GetCSharpVariableType(column) + " " + GetMemberVariableName(column);
+	
+	string defaultValue = GetMemberVariableDefaultValue(column);
+	if (defaultValue != "")
+	{
+		statement += " = " + defaultValue;
+	}
+	
+	statement += ";";
+	
+	return statement;
+}
+
+public string GetReaderAssignmentStatement(ColumnSchema column, int index)
+{
+	string statement = "if (!reader.IsDBNull(" + index.ToString() + ")) ";
+	statement += GetMemberVariableName(column) + " = ";
+	
+	if (column.Name.EndsWith("TypeCode")) statement += "(" + column.Name + ")";
+	
+	statement += "reader." + GetReaderMethod(column) + "(" + index.ToString() + ");";
+	
+	return statement;
+}
+
+public string GetCamelCaseName(string value)
+{
+	return value.Substring(0, 1).ToLower() + value.Substring(1);
+}
+
+public string GetMemberVariableName(ColumnSchema column)
+{
+	string propertyName = GetPropertyName(column);
+	string memberVariableName = "_" + GetCamelCaseName(propertyName);
+	
+	return memberVariableName;
+}
+
+public string GetPropertyName(ColumnSchema column)
+{
+	string propertyName = column.Name;
+
+	return propertyName;
+}
+		
+public string GetMemberVariableDefaultValue(ColumnSchema column)
+{
+	switch (column.DataType)
+	{
+		case DbType.Guid:
+		{
+			return "Guid.Empty";
+		}
+		case DbType.AnsiString:
+		case DbType.AnsiStringFixedLength:
+		case DbType.String:
+		case DbType.StringFixedLength:
+		{
+			return "String.Empty";
+		}
+		default:
+		{
+			return "";
+		}
+	}
+}
+
+public string GetCSharpVariableType(ColumnSchema column)
+{
+	if (column.Name.EndsWith("TypeCode")) return column.Name;
+    
+    if(column.AllowDBNull)
+    {
+	    return DbTypeCSharp[column.DataType.ToString()]+"?";
+    }
+    else
+    {
+        return DbTypeCSharp[column.DataType.ToString()];
+    }
+}
+
+public string GetReaderMethod(ColumnSchema column)
+{
+	return DbDataReader[column.DataType.ToString()];
+}
+
+public string GetClassName(TableSchema table)
+{
+	if (table.Name.Contains("_"))
+	{
+		return table.Name.Replace("_","");
+	}
+	else
+	{
+		return table.Name;
+	}
+  
+}
+
+public string GetSqlDbType(ColumnSchema column)
+{
+	return SqlNativeSqlDb[column.NativeType.ToString()];
+   
+}
+
+public string GetPrimaryKeyType(TableSchema table)
+{
+	if (table.PrimaryKey != null)
+	{
+		if (table.PrimaryKey.MemberColumns.Count == 1)
+		{
+			return GetCSharpVariableType(table.PrimaryKey.MemberColumns[0]);
+		}
+		else
+		{
+			throw new ApplicationException("This template will not work on primary keys with more than one member column.");
+		}
+	}
+	else
+	{
+		throw new ApplicationException("This template will only work on tables with a primary key.");
+	}
+   
+}
+
+public string GetCShartVariableTypeForeignList(TableKeySchema tableKey)
+{
+    if(tableKey.ForeignKeyTable.Name.Contains("_"))
+    {
+        return "List<"+tableKey.ForeignKeyTable.Name.Replace("_","")+">";
+    }
+    else
+    {
+        return "List<"+tableKey.ForeignKeyTable.Name+">";
+    }
+    
+}
+
+public string GetForeignProertyListName(TableKeySchema tableKey)
+{
+     if(tableKey.ForeignKeyTable.Name.Contains("_"))
+    {
+        return  tableKey.ForeignKeyTable.Name.Replace("_","")+"List";
+    }
+    else
+    {
+         return  tableKey.ForeignKeyTable.Name+"List";
+        
+    }
+}
+
+public override string GetFileName()
+{
+	return this.GetClassName(this.SourceTable) + ".cs";
+}
+</script>

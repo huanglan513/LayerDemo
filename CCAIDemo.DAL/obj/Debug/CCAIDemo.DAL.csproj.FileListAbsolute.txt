@@ -1,0 +1,7 @@
+C:\Users\huanglan.it\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.DAL\bin\Debug\CCAIDemo.DAL.dll
+C:\Users\huanglan.it\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.DAL\bin\Debug\CCAIDemo.DAL.pdb
+C:\Users\huanglan.it\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.DAL\bin\Debug\CCAIDemo.Entity.dll
+C:\Users\huanglan.it\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.DAL\bin\Debug\CCAIDemo.Entity.pdb
+C:\Users\huanglan.it\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.DAL\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\huanglan.it\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.DAL\obj\Debug\CCAIDemo.DAL.dll
+C:\Users\huanglan.it\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.DAL\obj\Debug\CCAIDemo.DAL.pdb

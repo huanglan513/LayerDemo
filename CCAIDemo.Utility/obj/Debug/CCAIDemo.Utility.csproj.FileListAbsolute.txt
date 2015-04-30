@@ -1,0 +1,5 @@
+C:\Users\huanglan.it\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.Utility\bin\Debug\CCAIDemo.Utility.dll
+C:\Users\huanglan.it\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.Utility\bin\Debug\CCAIDemo.Utility.pdb
+C:\Users\huanglan.it\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.Utility\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\huanglan.it\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.Utility\obj\Debug\CCAIDemo.Utility.dll
+C:\Users\huanglan.it\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.Utility\obj\Debug\CCAIDemo.Utility.pdb

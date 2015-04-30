@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+    <title>点击按钮，出现网页进度条 站长学院 JS代码</title>
+    <style type="text/css">
+    body,html{margin:0;padding:20px;font-size:12px;font-family:Arial;font:12px/1 Tahoma, Arial;}
+    .stepOut{height:20px;border:1px solid #000;background:#eee;width:200px;overflow:hidden;display:none;}
+    .stepIn{width:50px;background:#FF0080;border-top:1px solid #FFB5DA;border-bottom:1px solid #fff;overflow:hidden;color:#fff;text-align:center;font:12px/1.6 arial;}
+    </style>
+    </head>
+    <body>
+    <button id="google">button</button><br/><br/>
+    <div class="stepOut" id="stepOut" >
+    <div class="stepIn" id="stepIn"></div>
+    </div>
+    </body>
+    <script type="text/javascript">
+    //<![CDATA[
+        function LoadBar(outer, iner, time) {
+            $ = function (x) { return typeof x == "string" ? document.getElementByIdx_x(x) : x };
+            outer = $(outer);
+            iner = $(iner);
+            var i, width, This = this, s = (time || 2000) / 10;
+            this.run = function () {
+                clearTimeout(This.t);
+                outer.style.display = 'block';
+                width = outer.offsetWidth;
+                i = 0;
+                (function () {
+                    iner.style.width = width / s * i++;
+                    iner.innerHTML = Math.ceil(iner.offsetWidth / width * 100) + '%';
+                    if (i < s) {
+                        This.t = setTimeout(arguments.callee, 10)
+                    } else { iner.innerHTML = "ok" }
+                })()
+            }
+        };
+        var ldh = new LoadBar(stepOut, stepIn, 5000);
+        document.getElementById('google').onclick = ldh.run;
+    //]]>
+    </script>
+    </html>

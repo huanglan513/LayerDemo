@@ -1,0 +1,68 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Main.master.cs" Inherits="CCAIDemo.Web.Main" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+     <style type="text/css">
+div.menu
+{
+  width:1024px;
+  height:32px;   
+}
+
+div.menu ul li { line-height:32px;border-right:1px solid #999999;  font-size:large; padding:0 0 0 0;   width:90px;height:32px; }/*设置所有ul li静态样式*/
+div.menu ul li:hover,div.menu ul li a:hover,div.menu ul li a:active {  color:black; margin-left:0px;  text-align:center;}/*设置所有ul li动态样式*/
+div.menu ul li a 
+{
+display: block;
+float: left;
+text-decoration: none;
+color:white;
+cursor: pointer;
+width:90px;height:32px;font-size:12px;text-align:center; word-break:break-all;
+	}/*设置所有ul中li a样式*/
+div.menu ul ul{background-color:#B0ACAC; margin:0 0 0 0; }	
+div.menu ul ul li { width:90px;height:22px; border-style:none;  margin-left:0px; margin-top:0px; margin-right:0px;  margin-bottom:0px; padding-right:0px; padding-left:0px; padding-top:0px; padding-bottom:0px;  }/*设置二级菜单li 静态下拉样式*/
+div.menu ul ul li a{color:white;background-color:transparent;height:22px; text-align:left;}/*设置二级菜单li a静态下拉样式*/
+div.menu ul ul li a:hover{width:90px; background-color:transparent;height:22px;}
+
+ div.menu ul ul ul li{margin-left:0px; margin-top:0px; margin-right:0px;  margin-bottom:0px; } 
+ </style>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+     <div>
+       <asp:Menu ID="navmenu" runat="server" DynamicEnableDefaultPopOutImage="true" class="menu" 
+                    DynamicHorizontalOffset="2" BackColor="#3c89a5"  Orientation="Horizontal"
+                    StaticSubMenuIndent="10px" DisappearAfter="600"  >
+ 
+            <Items>
+                <asp:MenuItem Text="华南" Value="null" Selectable="false">
+                    <asp:MenuItem Text="海南" Value="hainansheng" Selectable="false">
+                        <asp:MenuItem Text="海口ssssssssssssssssssss" Value="haikou"></asp:MenuItem>
+                        <asp:MenuItem Text="三亚" Value="sanya"></asp:MenuItem>
+                        <asp:MenuItem Text="五指山" Value="wuzhishan"></asp:MenuItem>
+                    </asp:MenuItem>
+                </asp:MenuItem>
+                <asp:MenuItem Text="华北" Value="null" Selectable="false">
+                    <asp:MenuItem Text="河北" Value="hebeisheng" Selectable="false">
+                        <asp:MenuItem Text="石家庄" Value="shijiazhuang"></asp:MenuItem>
+                        <asp:MenuItem Text="保定" Value="baoding"></asp:MenuItem>
+                        <asp:MenuItem Text="唐山" Value="tangshan"></asp:MenuItem>
+                    </asp:MenuItem>
+                </asp:MenuItem>
+            </Items>
+        </asp:Menu>
+    </div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+</body>
+</html>

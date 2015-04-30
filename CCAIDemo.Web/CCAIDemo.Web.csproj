@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AF1C23A7-0458-450A-AD2F-E634E00BA8E2}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CCAIDemo.Web</RootNamespace>
+    <AssemblyName>CCAIDemo.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Ajax">
+      <HintPath>..\CCAIDemo.Lib\Ajax.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Css\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="Css\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="Css\images\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="Css\images\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="Css\images\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="Css\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Css\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="Css\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="Css\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="Css\images\ui-icons_222222_256x240.png" />
+    <Content Include="Css\images\ui-icons_228ef1_256x240.png" />
+    <Content Include="Css\images\ui-icons_ef8c08_256x240.png" />
+    <Content Include="Css\images\ui-icons_ffd27a_256x240.png" />
+    <Content Include="Css\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Css\jquery-ui-1.9.2.custom.min.css" />
+    <Content Include="ErrorPage.htm" />
+    <Content Include="Global.asax" />
+    <Content Include="HTMLPage1.htm" />
+    <Content Include="HTMLPage2.htm" />
+    <Content Include="Images\loading.gif" />
+    <Content Include="JScripts\autoNumeric.js" />
+    <Content Include="JScripts\jquery-1.8.3.js" />
+    <Content Include="JScripts\jquery-ui-1.9.2.custom.min.js" />
+    <Content Include="JScripts\jquery.min.js" />
+    <Content Include="My97DatePicker\calendar.js" />
+    <Content Include="My97DatePicker\config.js" />
+    <Content Include="My97DatePicker\lang\en.js" />
+    <Content Include="My97DatePicker\lang\zh-cn.js" />
+    <Content Include="My97DatePicker\lang\zh-tw.js" />
+    <Content Include="My97DatePicker\My97DatePicker.htm" />
+    <Content Include="My97DatePicker\skin\datePicker.gif" />
+    <Content Include="My97DatePicker\skin\default\datepicker.css" />
+    <Content Include="My97DatePicker\skin\default\img.gif" />
+    <Content Include="My97DatePicker\skin\WdatePicker.css" />
+    <Content Include="My97DatePicker\skin\whyGreen\bg.jpg" />
+    <Content Include="My97DatePicker\skin\whyGreen\datepicker.css" />
+    <Content Include="My97DatePicker\skin\whyGreen\img.gif" />
+    <Content Include="My97DatePicker\WdatePicker.js" />
+    <Content Include="My97DatePicker\开发包\lang\en.js" />
+    <Content Include="My97DatePicker\开发包\lang\zh-cn.js" />
+    <Content Include="My97DatePicker\开发包\lang\zh-tw.js" />
+    <Content Include="My97DatePicker\开发包\readme.txt" />
+    <Content Include="My97DatePicker\开发包\skin\datePicker.gif" />
+    <Content Include="My97DatePicker\开发包\skin\default\datepicker.css" />
+    <Content Include="My97DatePicker\开发包\skin\default\img.gif" />
+    <Content Include="My97DatePicker\开发包\skin\WdatePicker.css" />
+    <Content Include="My97DatePicker\开发包\skin\whyGreen\bg.jpg" />
+    <Content Include="My97DatePicker\开发包\skin\whyGreen\datepicker.css" />
+    <Content Include="My97DatePicker\开发包\skin\whyGreen\img.gif" />
+    <Content Include="TestMaster.aspx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="WebForm1.aspx" />
+    <Content Include="WebFormAjax.aspx" />
+    <Content Include="WebFormAjaxJquery.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseFolder\BasePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CommonCtrl\CButton.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Main.Master.cs">
+      <DependentUpon>Main.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Main.Master.designer.cs">
+      <DependentUpon>Main.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestMaster.aspx.cs">
+      <DependentUpon>TestMaster.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestMaster.aspx.designer.cs">
+      <DependentUpon>TestMaster.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebFormAjax.aspx.cs">
+      <DependentUpon>WebFormAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebFormAjax.aspx.designer.cs">
+      <DependentUpon>WebFormAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebFormAjaxJquery.aspx.cs">
+      <DependentUpon>WebFormAjaxJquery.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebFormAjaxJquery.aspx.designer.cs">
+      <DependentUpon>WebFormAjaxJquery.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CCAIDemo.Utility\CCAIDemo.Utility.csproj">
+      <Project>{00EAE855-FED1-4EE6-B33A-8112D6BE60AD}</Project>
+      <Name>CCAIDemo.Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Main.Master" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="My97DatePicker\lang\CVS\Entries" />
+    <None Include="My97DatePicker\lang\CVS\Repository" />
+    <None Include="My97DatePicker\lang\CVS\Root" />
+    <None Include="My97DatePicker\skin\CVS\Entries" />
+    <None Include="My97DatePicker\skin\CVS\Repository" />
+    <None Include="My97DatePicker\skin\CVS\Root" />
+    <None Include="My97DatePicker\skin\default\CVS\Entries" />
+    <None Include="My97DatePicker\skin\default\CVS\Repository" />
+    <None Include="My97DatePicker\skin\default\CVS\Root" />
+    <None Include="My97DatePicker\skin\whyGreen\CVS\Entries" />
+    <None Include="My97DatePicker\skin\whyGreen\CVS\Repository" />
+    <None Include="My97DatePicker\skin\whyGreen\CVS\Root" />
+    <None Include="My97DatePicker\开发包\lang\CVS\Entries" />
+    <None Include="My97DatePicker\开发包\lang\CVS\Repository" />
+    <None Include="My97DatePicker\开发包\lang\CVS\Root" />
+    <None Include="My97DatePicker\开发包\skin\CVS\Entries" />
+    <None Include="My97DatePicker\开发包\skin\CVS\Repository" />
+    <None Include="My97DatePicker\开发包\skin\CVS\Root" />
+    <None Include="My97DatePicker\开发包\skin\default\CVS\Entries" />
+    <None Include="My97DatePicker\开发包\skin\default\CVS\Repository" />
+    <None Include="My97DatePicker\开发包\skin\default\CVS\Root" />
+    <None Include="My97DatePicker\开发包\skin\whyGreen\CVS\Entries" />
+    <None Include="My97DatePicker\开发包\skin\whyGreen\CVS\Repository" />
+    <None Include="My97DatePicker\开发包\skin\whyGreen\CVS\Root" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>63722</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

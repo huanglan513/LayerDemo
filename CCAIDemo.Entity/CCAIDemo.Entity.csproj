@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4FCB6865-C504-4748-9888-229850420F10}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CCAIDemo.Entity</RootNamespace>
+    <AssemblyName>CCAIDemo.Entity</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CertItem.cs" />
+    <Compile Include="CFGAchievementReportRecord.cs" />
+    <Compile Include="CFGAssureCompanyBank.cs" />
+    <Compile Include="CFGBizHaltDays.cs" />
+    <Compile Include="CFGCommonAlertType.cs" />
+    <Compile Include="CFGDeptHRCount.cs" />
+    <Compile Include="CFGDeptQuota.cs" />
+    <Compile Include="CFGDeptYearAim.cs" />
+    <Compile Include="CFGDictionarySetting.cs" />
+    <Compile Include="CFGEmpRedeployType.cs" />
+    <Compile Include="CFGJobNameToRole.cs" />
+    <Compile Include="CFGMenuItem.cs" />
+    <Compile Include="CFGMortageDeptManualAchievement.cs" />
+    <Compile Include="CFGPayWayCharge.cs" />
+    <Compile Include="CFGPayWayCommision.cs" />
+    <Compile Include="CFGPayWayPapers.cs" />
+    <Compile Include="CFGPayWayState.cs" />
+    <Compile Include="CFGPropertyType.cs" />
+    <Compile Include="CFGReportType.cs" />
+    <Compile Include="CFGRoleScope.cs" />
+    <Compile Include="CFGRoleWorkSpace.cs" />
+    <Compile Include="CFGSubTradeType.cs" />
+    <Compile Include="CFGTradeAccessoryType.cs" />
+    <Compile Include="CFGTradeType.cs" />
+    <Compile Include="CFGUniversalDictionary.cs" />
+    <Compile Include="CFGWFApplyType.cs" />
+    <Compile Include="CTAgencyContextChangeApply.cs" />
+    <Compile Include="CTCommisionAdjust.cs" />
+    <Compile Include="CTCommisionAdjustAssigns.cs" />
+    <Compile Include="CTContract.cs" />
+    <Compile Include="CTContractAssistant.cs" />
+    <Compile Include="CTContractCancelApply.cs" />
+    <Compile Include="CTContractCommisionAssigns.cs" />
+    <Compile Include="CTContractMortageOut.cs" />
+    <Compile Include="CTContractReportReturn.cs" />
+    <Compile Include="CTExternalCommisionAdjustAssigns.cs" />
+    <Compile Include="CTExternalCommisionAssigns.cs" />
+    <Compile Include="CTMortageToBizAssigns.cs" />
+    <Compile Include="CTNetPortApply.cs" />
+    <Compile Include="CTNotaryDelegateApply.cs" />
+    <Compile Include="CTOwnerShipPapers.cs" />
+    <Compile Include="CTOwnerShipPapersReceives.cs" />
+    <Compile Include="CTOwnerShipProcess.cs" />
+    <Compile Include="CTOwnerShipTransfer.cs" />
+    <Compile Include="CTPropertySiteApply.cs" />
+    <Compile Include="DeptTest.cs" />
+    <Compile Include="FArea.cs" />
+    <Compile Include="FBankAccount.cs" />
+    <Compile Include="FCity.cs" />
+    <Compile Include="FContractType.cs" />
+    <Compile Include="FCustomer.cs" />
+    <Compile Include="FDepartment.cs" />
+    <Compile Include="FDepartment0802.cs" />
+    <Compile Include="FDepartmentBak.cs" />
+    <Compile Include="FDepartmentSYB.cs" />
+    <Compile Include="FDeptType.cs" />
+    <Compile Include="FDeptWorkInfo.cs" />
+    <Compile Include="FDistrict.cs" />
+    <Compile Include="FEmployee.cs" />
+    <Compile Include="FemployeeBak.cs" />
+    <Compile Include="FEmpRedeployInfo.cs" />
+    <Compile Include="FEmpWorkInfo.cs" />
+    <Compile Include="FEmpWorkInfo0419.cs" />
+    <Compile Include="FEstate.cs" />
+    <Compile Include="FForward.cs" />
+    <Compile Include="FINAccountFlowHistory.cs" />
+    <Compile Include="FINAccountFlowHistorySyncToSupply.cs" />
+    <Compile Include="FINBackupMoneyApply.cs" />
+    <Compile Include="FINBackupMoneyBankAccount.cs" />
+    <Compile Include="FINCheckCommision.cs" />
+    <Compile Include="FINCheckCommisionInvoice.cs" />
+    <Compile Include="FINCommisionAllocateApply.cs" />
+    <Compile Include="FINCommisionAllocateApplyDetail.cs" />
+    <Compile Include="FINCommisionReturnApply.cs" />
+    <Compile Include="FINCommisionTransferApply.cs" />
+    <Compile Include="FINCommisionTransferApplyDetail.cs" />
+    <Compile Include="FINImprestApply.cs" />
+    <Compile Include="FINImprestApplyDetail.cs" />
+    <Compile Include="FINImprestBankAccount.cs" />
+    <Compile Include="FINInvoiceApply.cs" />
+    <Compile Include="FINInvoiceBook.cs" />
+    <Compile Include="FINInvoiceCommApply.cs" />
+    <Compile Include="FINInvoiceCommission.cs" />
+    <Compile Include="FINInvoicingApply.cs" />
+    <Compile Include="FINPaymentApply.cs" />
+    <Compile Include="FINPaymentApplyDetails.cs" />
+    <Compile Include="FINReceipt.cs" />
+    <Compile Include="FINReceiptBook.cs" />
+    <Compile Include="FINReceiptCommApply.cs" />
+    <Compile Include="FOwner.cs" />
+    <Compile Include="FProperty.cs" />
+    <Compile Include="Function.cs" />
+    <Compile Include="FWorkSpaceItem.cs" />
+    <Compile Include="HRStaffGoal.cs" />
+    <Compile Include="SqlService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SYSDeptOpScope.cs" />
+    <Compile Include="SYSFeedBack.cs" />
+    <Compile Include="SYSOperate.cs" />
+    <Compile Include="SYSOperateModel.cs" />
+    <Compile Include="SYSRole.cs" />
+    <Compile Include="SYSRoleOperateRight.cs" />
+    <Compile Include="SysSet.cs" />
+    <Compile Include="SYSUserAlertList.cs" />
+    <Compile Include="SYSUserOpScope.cs" />
+    <Compile Include="TableAttribute.cs" />
+    <Compile Include="WFApplyInstance.cs" />
+    <Compile Include="WFApplyInstanceDetail.cs" />
+    <Compile Include="WFApplyInstanceStateDetail.cs" />
+    <Compile Include="WFAuditHistory.cs" />
+    <Compile Include="WFOutOfOfficeSet.cs" />
+    <Compile Include="WFOutOfOfficeSetDetail.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

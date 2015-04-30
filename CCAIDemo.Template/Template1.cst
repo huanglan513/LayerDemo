@@ -1,0 +1,35 @@
+﻿<%@ Template Language="C#" TargetLanguage="Text" Debug="False" %>
+<%@ Property Name="SourceTable" Type="SchemaExplorer.TableSchema" Category="Context" Description="Table that the object is based on." %>
+<%@ Property Name="ClassNamespace" Type="System.String" Category="Options" Default="BusinessObjects" Description="Namespace your class is in. Only used if SingleFileMode is true!" %>
+<%@ Assembly Name="SchemaExplorer" %>
+<%@ Assembly Name="System.Data" %>
+<%@ Import Namespace="SchemaExplorer" %>
+<%@ Import Namespace="System.Data" %>
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace <%= this.ClassNamespace %>
+{
+    public class <%= GetClassName(SourceTable) %>
+	{
+    }
+}
+
+<script runat="template">
+// My methods here.
+
+public string GetClassName(TableSchema table)
+{
+	if (table.Name.Contains("_"))
+	{
+		return table.Name.Replace("_","")+"DataAccess";
+	}
+	else
+	{
+		return table.Name+"DataAccess";
+	}
+}
+</script>
