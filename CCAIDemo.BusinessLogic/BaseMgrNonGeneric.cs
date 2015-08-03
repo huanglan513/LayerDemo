@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using CCAIDemo.Utility;
+using CCAIDemo.DataAccess;
 
 namespace CCAIDemo.BusinessLogic
 {
@@ -16,7 +17,7 @@ namespace CCAIDemo.BusinessLogic
         /// <returns></returns>
         public DataSet GetDataSetBySql(string sql)
         {
-            return new BaseMgrNonGeneric().GetDataSetBySql(sql);
+            return new BaseDataAccessNonGeneric().GetDataSetBySql(sql);
         }
 
         /// <summary>
@@ -29,7 +30,7 @@ namespace CCAIDemo.BusinessLogic
         /// <returns></returns>
         public DataSet GetDataSetBySqlPaged(PageHelper pageHelper, string sql, string orderBy)
         {
-            return new BaseMgrNonGeneric().GetDataSetBySqlPaged(pageHelper, sql, orderBy);
+            return new BaseDataAccessNonGeneric().GetDataSetBySqlPaged(pageHelper, sql, orderBy);
         }
     }
 }

@@ -3,3 +3,7 @@ C:\Users\huanglan.it\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.Ent
 C:\Users\huanglan.it\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.Entity\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\huanglan.it\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.Entity\obj\Debug\CCAIDemo.Entity.dll
 C:\Users\huanglan.it\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.Entity\obj\Debug\CCAIDemo.Entity.pdb
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.Entity\bin\Debug\CCAIDemo.Entity.dll
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.Entity\bin\Debug\CCAIDemo.Entity.pdb
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.Entity\obj\Debug\CCAIDemo.Entity.dll
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.Entity\obj\Debug\CCAIDemo.Entity.pdb

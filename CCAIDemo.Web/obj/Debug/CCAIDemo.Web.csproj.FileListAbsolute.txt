@@ -6,3 +6,11 @@ C:\Users\huanglan.it\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.Web
 C:\Users\huanglan.it\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.Web\obj\Debug\CCAIDemo.Web.dll
 C:\Users\huanglan.it\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.Web\obj\Debug\CCAIDemo.Web.pdb
 C:\Users\huanglan.it\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.Web\bin\Ajax.dll
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.Web\bin\CCAIDemo.Web.dll
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.Web\bin\CCAIDemo.Web.pdb
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.Web\bin\Ajax.dll
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.Web\bin\CCAIDemo.Utility.dll
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.Web\bin\CCAIDemo.Utility.pdb
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.Web\obj\Debug\CCAIDemo.Web.csprojResolveAssemblyReference.cache
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.Web\obj\Debug\CCAIDemo.Web.dll
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.Web\obj\Debug\CCAIDemo.Web.pdb

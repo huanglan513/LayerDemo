@@ -9,3 +9,14 @@ C:\Users\huanglan.it\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.Bus
 C:\Users\huanglan.it\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.BusinessLogic\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\huanglan.it\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.BusinessLogic\obj\Debug\CCAIDemo.BusinessLogic.dll
 C:\Users\huanglan.it\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.BusinessLogic\obj\Debug\CCAIDemo.BusinessLogic.pdb
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.BusinessLogic\bin\Debug\CCAIDemo.BusinessLogic.dll
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.BusinessLogic\bin\Debug\CCAIDemo.BusinessLogic.pdb
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.BusinessLogic\bin\Debug\CCAIDemo.DataAccess.dll
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.BusinessLogic\bin\Debug\CCAIDemo.Entity.dll
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.BusinessLogic\bin\Debug\CCAIDemo.Utility.dll
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.BusinessLogic\bin\Debug\CCAIDemo.DataAccess.pdb
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.BusinessLogic\bin\Debug\CCAIDemo.Entity.pdb
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.BusinessLogic\bin\Debug\CCAIDemo.Utility.pdb
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.BusinessLogic\obj\Debug\CCAIDemo.BusinessLogic.csprojResolveAssemblyReference.cache
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.BusinessLogic\obj\Debug\CCAIDemo.BusinessLogic.dll
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.BusinessLogic\obj\Debug\CCAIDemo.BusinessLogic.pdb

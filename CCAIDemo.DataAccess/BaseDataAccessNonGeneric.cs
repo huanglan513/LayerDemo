@@ -17,8 +17,7 @@ namespace CCAIDemo.DataAccess
         /// <returns></returns>
         public DataSet GetDataSetBySql(string sql)
         {
-            SqlHelper sqlHelper = new SqlHelper();
-            DataSet ds = sqlHelper.ExecuteDataSet(sql, CommandType.Text);
+            DataSet ds = SqlHelper.ExecuteDataSet(sql, CommandType.Text);
 
             return ds;
         }
@@ -49,8 +48,7 @@ namespace CCAIDemo.DataAccess
             sql = regexFrom.Replace(sql, "from");
             string sqlCount = "select count(1) as RecordCount " + sql.Substring(sql.IndexOf("from"));
 
-            SqlHelper sqlHelper = new SqlHelper();
-            DataSet ds = sqlHelper.ExecuteDataSet(sqlPaged + ";" + sqlCount, CommandType.Text);
+            DataSet ds = SqlHelper.ExecuteDataSet(sqlPaged + ";" + sqlCount, CommandType.Text);
 
             if (ds.Tables.Count >= 2 && !string.IsNullOrEmpty(ds.Tables[1].Rows[0]["RecordCount"].ToString()))
             {

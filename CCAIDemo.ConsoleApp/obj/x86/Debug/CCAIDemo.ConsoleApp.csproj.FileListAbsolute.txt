@@ -19,3 +19,17 @@ C:\Users\huanglan.it\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.Con
 C:\Users\huanglan.it\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.ConsoleApp\obj\x86\Debug\CCAIDemo.ConsoleApp.pdb
 C:\Users\huanglan.it\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.ConsoleApp\bin\Debug\CCAIDemo.BusinessLogic.dll
 C:\Users\huanglan.it\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.ConsoleApp\bin\Debug\CCAIDemo.BusinessLogic.pdb
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.ConsoleApp\bin\Debug\CCAIDemo.ConsoleApp.exe.config
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.ConsoleApp\bin\Debug\CCAIDemo.ConsoleApp.exe
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.ConsoleApp\bin\Debug\CCAIDemo.ConsoleApp.pdb
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.ConsoleApp\bin\Debug\CCAIDemo.BusinessLogic.dll
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.ConsoleApp\bin\Debug\CCAIDemo.DataAccess.dll
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.ConsoleApp\bin\Debug\CCAIDemo.Entity.dll
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.ConsoleApp\bin\Debug\CCAIDemo.Utility.dll
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.ConsoleApp\bin\Debug\CCAIDemo.BusinessLogic.pdb
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.ConsoleApp\bin\Debug\CCAIDemo.DataAccess.pdb
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.ConsoleApp\bin\Debug\CCAIDemo.Entity.pdb
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.ConsoleApp\bin\Debug\CCAIDemo.Utility.pdb
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.ConsoleApp\obj\x86\Debug\CCAIDemo.ConsoleApp.csprojResolveAssemblyReference.cache
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.ConsoleApp\obj\x86\Debug\CCAIDemo.ConsoleApp.exe
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.ConsoleApp\obj\x86\Debug\CCAIDemo.ConsoleApp.pdb

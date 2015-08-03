@@ -7,3 +7,12 @@ C:\Users\huanglan.it\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.Dat
 C:\Users\huanglan.it\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.DataAccess\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\huanglan.it\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.DataAccess\obj\Debug\CCAIDemo.DataAccess.dll
 C:\Users\huanglan.it\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.DataAccess\obj\Debug\CCAIDemo.DataAccess.pdb
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.DataAccess\bin\Debug\CCAIDemo.DataAccess.dll
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.DataAccess\bin\Debug\CCAIDemo.DataAccess.pdb
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.DataAccess\bin\Debug\CCAIDemo.Entity.dll
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.DataAccess\bin\Debug\CCAIDemo.Utility.dll
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.DataAccess\bin\Debug\CCAIDemo.Entity.pdb
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.DataAccess\bin\Debug\CCAIDemo.Utility.pdb
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.DataAccess\obj\Debug\CCAIDemo.DataAccess.csprojResolveAssemblyReference.cache
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.DataAccess\obj\Debug\CCAIDemo.DataAccess.dll
+E:\Users\huanglan.IT\Documents\Visual Studio 2010\Projects\CCAIDemo\CCAIDemo.DataAccess\obj\Debug\CCAIDemo.DataAccess.pdb

@@ -1,13 +1,11 @@
-/*
-*本代码由代码生成器自动生成，请不要更改此文件的任何代码。
-*生成时间：2012/6/11 17:20:48
-*/
-
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
-using System.Data;
-
+ /*
+*本代码由代码生成器自动生成，请不要更改此文件的任何代码。
+*生成时间：2015/8/3 12:02:43
+*/
 namespace CCAIDemo.Entity
 {
 	#region FEmployee
@@ -15,7 +13,7 @@ namespace CCAIDemo.Entity
 	/// This object represents the properties and navigation list of a FEmployee.
 	/// </summary>
     [Serializable]
-    [Table("F_Employee")]
+    [Table("F_Employee","EmpID")]
 	public class FEmployee
 	{
 		
@@ -164,6 +162,41 @@ namespace CCAIDemo.Entity
 			get;
 			set;
 		}
+
+        [Column("ResignDate")]
+		public DateTime? ResignDate
+		{
+			get;
+			set;
+		}
+
+        [Column("DeptGUID")]
+		public string DeptGUID
+		{
+			get;
+			set;
+		}
+
+        [Column("HREmpID")]
+		public string HREmpID
+		{
+			get;
+			set;
+		}
+
+        [Column("EmpGUID")]
+		public string EmpGUID
+		{
+			get;
+			set;
+		}
+
+        [Column("AllowUseCCAI")]
+		public int AllowUseCCAI
+		{
+			get;
+			set;
+		}
 		#endregion
         
         #region Navigation List
@@ -172,8 +205,6 @@ namespace CCAIDemo.Entity
     }
 #endregion
 }
-
-
 
 
 

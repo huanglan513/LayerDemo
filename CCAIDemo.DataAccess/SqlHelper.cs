@@ -10,67 +10,23 @@ using System.Xml;
 
 namespace CCAIDemo.DataAccess
 {
-    public class SqlHelper
+    public static class SqlHelper
     {
-        private static string connectionString = ConfigurationManager.ConnectionStrings["Provider"].ConnectionString;
+        private static readonly string connectionString = ConfigurationManager.ConnectionStrings["Provider"].ConnectionString;
 
-        private SqlConnection Connection;
-        private SqlTransaction Transaction;
-
-        /// <summary>
-        /// 初始化Dbconnection对象
-        /// </summary>
-        /// <returns></returns>
-        private SqlConnection buildInitConnection()
+        #region 创建数据库连接
+        public static SqlConnection GetConnection()
         {
             return new SqlConnection(connectionString);
         }
 
-        /// <summary>
-        /// 默认构造函数(初始化DbConnection)
-        /// </summary>
-        public SqlHelper()
+        public static SqlConnection GetConnection(string connStr)
         {
-            this.Connection = buildInitConnection();
-        }
-
-        #region 创建数据库连接
-        public static SqlConnection CreateConnection()
-        {
-            SqlConnection sqlConnnection = new SqlConnection();
-            sqlConnnection.ConnectionString = SqlHelper.connectionString;
-            return sqlConnnection;
-        }
-
-        public static SqlConnection CreateConnection(string connectionString)
-        {
-            SqlConnection sqlConnnection = new SqlConnection();
-            sqlConnnection.ConnectionString = connectionString;
-            return sqlConnnection;
+            return new SqlConnection(connStr);
         }
         #endregion
 
         #region 创建SqlCommand
-        private SqlCommand BuildInitCommand(CommandType commandType)
-        {
-            SqlCommand Command = new SqlCommand();
-            Command.Connection = Connection;
-            Command.CommandType = commandType;
-            return Command;
-        }
-        /// <summary>
-        /// 初始化DbCommand对象
-        /// </summary>
-        /// <param name="commandText">T-Sql语句</param>
-        /// <returns>DbCommand对象</returns>
-        private SqlCommand BuildInitCommand(string commandText, CommandType commandType)
-        {
-            SqlCommand Command = new SqlCommand();
-            Command.Connection = Connection;
-            Command.CommandType = commandType;
-            Command.CommandText = commandText;
-            return Command;
-        }
 
         /// <summary>
         /// 初始化DbCommand对象
@@ -78,40 +34,10 @@ namespace CCAIDemo.DataAccess
         /// <param name="commandText">T-Sql语句</param>
         /// <param name="op">DbParameter数组</param>
         /// <returns>DbCommand对象</returns>
-        private SqlCommand BuildInitCommand(string commandText, CommandType commandType, SqlParameter[] op)
+        private static  SqlCommand BuildInitCommand(SqlConnection conn, string commandText, CommandType commandType, SqlParameter[] op)
         {
             SqlCommand Command = new SqlCommand();
-            Command.Connection = Connection;
-            Command.CommandType = commandType;
-            Command.CommandText = commandText;
-            foreach (SqlParameter p in op)
-            {
-                //check for derived output value with no value assigned
-                if ((p.Direction == ParameterDirection.InputOutput) && (p.Value == null))
-                {
-                    p.Value = DBNull.Value;
-                }
-
-                Command.Parameters.Add(p);
-            }
-            return Command;
-        }
-        private SqlCommand BuildInitCommand(string commandText, CommandType commandType, SqlTransaction tran)
-        {
-            return BuildInitCommand(commandText, commandType, null, tran);
-        }
-
-        /// <summary>
-        /// 初始化DbCommand对象
-        /// </summary>
-        /// <param name="commandText">T-Sql语句</param>
-        /// <param name="op">DbParameter数组</param>
-        /// <returns>DbCommand对象</returns>
-        private SqlCommand BuildInitCommand(string commandText, CommandType commandType, SqlParameter[] op, SqlTransaction tran)
-        {
-            SqlCommand Command = new SqlCommand();
-            Command.Connection = tran.Connection;   //此Connection与SqlHelper初始化的Connection无关了，不是同一个实例了。。。。
-            Command.Transaction = tran;
+            Command.Connection = conn;
             Command.CommandType = commandType;
             Command.CommandText = commandText;
             if (op != null)
@@ -129,56 +55,46 @@ namespace CCAIDemo.DataAccess
             }
             return Command;
         }
+
         #endregion
 
         #region 无事务的操作
+         /// <summary>
+        /// 执行T-Sql语句,返回受影响的行数
+        /// </summary>
+        /// <param name="commandText">T-Sql语句</param>
+        /// <returns></returns>
+        public static int ExecuteNonQuery(string commandText, CommandType commandType = CommandType.Text, SqlParameter[] op=null)
+        {
+            return ExecuteNonQuery(connectionString, commandText, commandType,op);
+        }
+
         /// <summary>
         /// 执行T-Sql语句,返回受影响的行数
         /// </summary>
         /// <param name="commandText">T-Sql语句</param>
         /// <returns></returns>
-        public int ExecuteNonQuery(string commandText, CommandType commandType)
+        public static int ExecuteNonQuery(string connStr, string commandText, CommandType commandType = CommandType.Text, SqlParameter[] op=null)
         {
             int flagValue;
-            SqlCommand Command = BuildInitCommand(commandText, commandType);
-            if (Connection.State == ConnectionState.Closed)
+            
+            using (SqlConnection connection = new SqlConnection(connStr))
             {
-                Connection.Open();
+                SqlCommand Command = BuildInitCommand(connection,commandText, commandType, op);
+                flagValue = Command.ExecuteNonQuery();
             }
-            flagValue = Command.ExecuteNonQuery();
-            Connection.Close();
-
             return flagValue;
         }
+     
 
         /// <summary>
-        /// 执行带数的T-Sql语句,返回受影响的行数
-        /// </summary>
-        /// <param name="commandText">T-Sql语句</param>
-        /// <param name="op"></param>
-        /// <returns></returns>
-        public int ExecuteNonQuery(string commandText, CommandType commandType, SqlParameter[] op)
-        {
-            int flagValue;
-            SqlCommand Command = BuildInitCommand(commandText, commandType, op);
-            Connection.Open();
-            flagValue = Command.ExecuteNonQuery();
-            Connection.Close();
-            return flagValue;
-        }
-
-        /// <summary>
-        /// 执行T-Sql语句,返回第一行第一列
+        /// 执行T-Sql语句,返回第一行第一列,需要用户自己打开数据库连接和关闭连接
         /// </summary>
         /// <param name="commandText">T-Sql语句</param>
         /// <returns></returns>
-        public Object ExecuteScalar(string commandText, CommandType commandType)
+         public static object ExecuteScalar(string commandText, CommandType commandType=CommandType.Text, SqlParameter[] op=null)
         {
-            SqlCommand Command = BuildInitCommand(commandText, commandType);
-            Connection.Open();
-            object flagValue = Command.ExecuteScalar();
-            Connection.Close();
-            return flagValue;
+           return ExecuteScalar(connectionString,commandText,commandType,op);
         }
 
         /// <summary>
@@ -187,40 +103,60 @@ namespace CCAIDemo.DataAccess
         /// <param name="commandText">T-Sql语句</param>
         /// <param name="op"></param>
         /// <returns></returns>
-        public object ExecuteScalar(string commandText, CommandType commandType, SqlParameter[] op)
-        {
-            SqlCommand Command = BuildInitCommand(commandText, commandType, op);
-            Connection.Open();
-            object flagValue = Command.ExecuteScalar();
-            Connection.Close();
-            return flagValue;
-        }
+         public static object ExecuteScalar(string connStr, string commandText, CommandType commandType = CommandType.Text, SqlParameter[] op = null)
+         {
+             object flagValue = null;
+             using (SqlConnection connection = new SqlConnection(connStr))
+             {
+                 SqlCommand Command = BuildInitCommand(connection, commandText, commandType, op);
+                 flagValue = Command.ExecuteScalar();
+             }
+             return flagValue;
+         }
+
+         public static SqlDataReader ExecuteReader(string commandText, CommandType commandType = CommandType.Text, SqlParameter[] op = null)
+         {
+             return ExecuteReader(connectionString, commandText, commandType, op);
+         }
 
         /// <summary>
-        /// 执行T-Sql语句，返回SqlDataReader,开发者使用完该方法，需自己调用SqlHelper.Close()关闭连接，切记
+        /// 执行T-Sql语句，返回SqlDataReader
         /// </summary>
         /// <param name="commandText">T-Sql语句</param>
         /// <returns></returns>
-        public SqlDataReader ExecuteReader(string commandText, CommandType commandType)
+        public static SqlDataReader ExecuteReader(string connStr,string commandText, CommandType commandType = CommandType.Text, SqlParameter[] op = null)
         {
-            SqlCommand Command = BuildInitCommand(commandText, commandType);
-            Connection.Open();
-            SqlDataReader Reader = Command.ExecuteReader(CommandBehavior.CloseConnection);
-            return Reader;
-        }
+           
+            SqlCommand cmd = new SqlCommand();
+            SqlConnection conn = new SqlConnection(connectionString);
+            // we use a try/catch here because if the method throws an exception we want to 
+            // close the connection throw code, because no datareader will exist, hence the 
+            // commandBehaviour.CloseConnection will not work
+            try
+            {
+                SqlCommand Command = BuildInitCommand(conn, commandText, commandType, op);
+                conn.Open();
+                SqlDataReader rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
 
-        /// <summary>
-        /// 执行带参数的T-Sql语句，返回SqlDataReader,开发者使用完该方法，需自己调用SqlHelper.Close()关闭连接，切记
-        /// </summary>
-        /// <param name="commandText">T-Sql语句</param>
-        /// <param name="op"></param>
-        /// <returns></returns>
-        public SqlDataReader ExecuteReader(string commandText, CommandType commandType, SqlParameter[] op)
+                return rdr;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                if (conn != null && conn.State != ConnectionState.Closed)
+                {
+                    conn.Close();
+                }
+            }
+ 
+        }
+   
+        public static DataSet ExecuteDataSet( string commandText, CommandType commandType = CommandType.Text, SqlParameter[] op = null)
         {
-            SqlCommand Command = BuildInitCommand(commandText, commandType, op);
-            Connection.Open();
-            SqlDataReader Reader = Command.ExecuteReader(CommandBehavior.CloseConnection);
-            return Reader;
+            return ExecuteDataSet(connectionString, commandText, commandType, op);
         }
 
         /// <summary>
@@ -229,194 +165,104 @@ namespace CCAIDemo.DataAccess
         /// <param name="commandText"></param>
         /// <param name="tableName"></param>
         /// <returns></returns>
-        public DataSet ExecuteDataSet(string commandText, CommandType commandType)
+        public static DataSet ExecuteDataSet(string connStr, string commandText, CommandType commandType = CommandType.Text, SqlParameter[] op = null)
         {
-            SqlDataAdapter Adapter = new SqlDataAdapter();
-            Adapter.SelectCommand = BuildInitCommand(commandText, commandType);
             DataSet Ds = new DataSet();
-            Connection.Open();
-            Adapter.Fill(Ds);
-            Connection.Close();
+            SqlDataAdapter Adapter = new SqlDataAdapter();
+            using (SqlConnection connection = new SqlConnection())
+            {
+                Adapter.SelectCommand = BuildInitCommand(connection,commandText, commandType,op);
+                Adapter.Fill(Ds);
+            }
             return Ds;
         }
 
+        public static XmlReader ExecuteXmlReader(string commandText, CommandType commandType = CommandType.Text, SqlParameter[] op = null)
+        {
+            return ExecuteXmlReader(connectionString, commandText, commandType, op);
+        }
+    
         /// <summary>
-        /// 执行带参数的T-Sql语句,返回DataSet;
-        /// </summary>
-        /// <param name="commandText"></param>
-        /// <param name="op"></param>
-        /// <param name="tableName"></param>
-        /// <returns></returns>
-        public DataSet ExecuteDataSet(string commandText, CommandType commandType, SqlParameter[] op, string tableName)
-        {
-            SqlDataAdapter Adapter = new SqlDataAdapter();
-            Adapter.SelectCommand = BuildInitCommand(commandText, commandType, op);
-            DataSet Ds = new DataSet();
-            Connection.Open();
-            Adapter.Fill(Ds, tableName);
-            Connection.Close();
-            return Ds;
-        }
-
-        public DataTable ExecuteDataTable(string commandText, CommandType commandType)
-        {
-            DataTable dataTable = new DataTable();
-            SqlDataAdapter Adapter = new SqlDataAdapter();
-            Adapter.SelectCommand = BuildInitCommand(commandText, commandType);
-            Connection.Open();
-            Adapter.Fill(dataTable);
-            Connection.Close();
-            return dataTable;
-        }
-
-        public DataTable ExecuteDataTable(string commandText, CommandType commandType, SqlParameter[] op)
-        {
-            DataTable dataTable = new DataTable();
-            SqlDataAdapter Adapter = new SqlDataAdapter();
-            Adapter.SelectCommand = BuildInitCommand(commandText, commandType, op);
-            Connection.Open();
-            Adapter.Fill(dataTable);
-            Connection.Close();
-            return dataTable;
-        }
-
-        /// <summary>
-        /// 执行T-Sql语句，返回XmlReader,开发者使用完该方法，需自己调用SqlHelper.Close()关闭连接，切记
+        /// 执行T-Sql语句，返回XmlReader,开发者使用完该方法
         /// </summary>
         /// <param name="commandText">T-Sql语句</param>
         /// <returns></returns>
-        public XmlReader ExecuteXmlReader(string commandText, CommandType commandType)
+        public static XmlReader ExecuteXmlReader(string connStr, string commandText, CommandType commandType = CommandType.Text, SqlParameter[] op = null)
         {
-            SqlCommand Command = BuildInitCommand(commandText, commandType);
-            Connection.Open();
-            XmlReader Reader = Command.ExecuteXmlReader();
-            Connection.Close();
-            return Reader;
-        }
 
-        /// <summary>
-        /// 执行带参数的T-Sql语句，返回XmlReader,开发者使用完该方法，需自己调用SqlHelper.Close()关闭连接，切记
-        /// </summary>
-        /// <param name="commandText">T-Sql语句</param>
-        /// <param name="op"></param>
-        /// <returns></returns>
-        public XmlReader ExecuteXmlReader(string commandText, CommandType commandType, SqlParameter[] op)
-        {
-            SqlCommand Command = BuildInitCommand(commandText, commandType, op);
-            Connection.Open();
-            XmlReader Reader = Command.ExecuteXmlReader();
-            Connection.Close();
-            return Reader;
-        }
-        #endregion
-
-        #region 带事务的操作
-        public int ExecuteNonQuery(string commandText, CommandType commandType, Trans tran)
-        {
-            if (tran == null)
-            {
-                return ExecuteNonQuery(commandText, commandType);
-            }
-            int flagValue;
-            SqlCommand Command = null;
-            Command = BuildInitCommand(commandText, commandType, tran.SqlTrans);
-            flagValue = Command.ExecuteNonQuery();
-            return flagValue;
-        }
-
-        public int ExecuteNonQuery(string commandText, CommandType commandType, SqlParameter[] op, Trans tran)
-        {
-            if (tran == null)
-            {
-                return ExecuteNonQuery(commandText, commandType, op);
-            }
-            SqlCommand Command = BuildInitCommand(commandText, commandType, op, tran.SqlTrans);
-            int flagValue = Command.ExecuteNonQuery();
-            return flagValue;
-        }
-
-        public Object ExecuteScalar(string commandText, CommandType commandType, Trans tran)
-        {
-            if (tran == null)
-            {
-                return ExecuteScalar(commandText, commandType);
-            }
-            SqlCommand Command = BuildInitCommand(commandText, commandType, tran.SqlTrans);
-            return Command.ExecuteScalar();
-        }
-
-        public Object ExecuteScalar(string commandText, CommandType commandType, SqlParameter[] op, Trans tran)
-        {
-            if (tran == null)
-            {
-                return ExecuteScalar(commandText, commandType, op);
-            }
-            SqlCommand Command = BuildInitCommand(commandText, commandType, op, tran.SqlTrans);
-            return Command.ExecuteScalar();
-        }
-
-        public SqlDataReader ExecuteReader(string commandText, CommandType commandType, Trans tran)
-        {
-            if (tran == null)
-            {
-                return ExecuteReader(commandText, commandType);
-            }
-            SqlCommand Command = BuildInitCommand(commandText, commandType, tran.SqlTrans);
-            SqlDataReader Reader = Command.ExecuteReader();
-            return Reader;
-        }
-
-        public SqlDataReader ExecuteReader(string commandText, CommandType commandType, SqlParameter[] op, Trans tran)
-        {
-            if (tran == null)
-            {
-                return ExecuteReader(commandText, commandType, op);
-            }
-            SqlCommand Command = BuildInitCommand(commandText, commandType, op, tran.SqlTrans);
-            SqlDataReader Reader = Command.ExecuteReader();
-            return Reader;
-        }
-        #endregion
-
-
-        /// <summary>
-        /// 执行数据库事务
-        /// </summary>
-        /// <param name="sqlStringList"></param>
-        public void ExecuteTransaction(ArrayList sqlStringList, CommandType commandType)
-        {
-            Connection.Open();
-            SqlTransaction tran = Connection.BeginTransaction();
-            SqlCommand Command = BuildInitCommand(commandType);
-            Command.Transaction = tran;
+            SqlConnection conn = new SqlConnection();
             try
             {
-                for (int i = 0; i < sqlStringList.Count; i++)
-                {
-                    Command.CommandText = sqlStringList[i].ToString();
-                    Command.ExecuteNonQuery();
-                }
-                tran.Commit();
-                Connection.Close();
+                SqlCommand Command = BuildInitCommand(conn, commandText, commandType, op);
+                XmlReader Reader = Command.ExecuteXmlReader();
+                return Reader;
             }
-            catch (SqlException E)
+            catch
             {
-                tran.Rollback();
-                throw new Exception(E.Message);
+                throw;
+            }
+            finally
+            {
+                if (conn != null && conn.State != ConnectionState.Closed)
+                {
+                    conn.Close();
+                }
             }
         }
 
         /// <summary>
-        /// 关闭数据库连接，开发者仅需在调用返回类型为IDataReader或其子类的方法时才调用该方法，其他方法无需调用
+        /// 执行事务，返回0或者1
         /// </summary>
-        public void Close()
+        /// <param name="Sqlstr">sql语句</param>
+        /// <returns></returns>
+        public static int ExecTran(string[] Sqlstr)
         {
-            if (Connection != null && Connection.State == ConnectionState.Open)
+            SqlConnection conn = GetConnection();
+            SqlTransaction tran=null;
+            try
             {
-                Connection.Close();
+                conn.Open();
+                tran = conn.BeginTransaction();//先实例SqlTransaction类，使用这个事务使用的是con 这个连接，使用BeginTransaction这个方法来开始执行这个事务
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conn;
+                cmd.Transaction = tran;
+
+
+                int count = Sqlstr.Length;
+                for (int i = 0; i < count; i++)
+                {
+                    cmd.CommandText = Sqlstr[i];
+                    cmd.ExecuteNonQuery();
+                }
+                tran.Commit();
+                return 1;
             }
+            catch (Exception ex)
+            {
+                if (tran != null)
+                    tran.Rollback();
+                throw ex;
+            }
+            finally
+            {
+                tran.Dispose();
+                Close(conn);
+            }
+        }
 
+        #endregion
 
+        /// <summary>
+        /// 关闭数据库连接,当不是调用系统提供的方法，而是单独处理数据库时，才需要调用Close
+        /// </summary>
+        public static void Close(SqlConnection connection)
+        {
+            if (connection != null && connection.State != ConnectionState.Closed)
+            {
+                connection.Close();
+                connection.Dispose();
+            }
         }
     }
 }

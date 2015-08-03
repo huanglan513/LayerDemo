@@ -19,7 +19,7 @@ namespace CCAIDemo.DataAccess
        /// <param name="primaryKeyValue"></param>
        /// <param name="tran"></param>
        /// <returns></returns>
-        public T GetEntityByPrimaryKey(string primaryKeyValue,Trans tran=null)
+        public T GetEntityByPrimaryKey(string primaryKeyValue)
         {
             T entity = Activator.CreateInstance<T>();
             Type columnType = typeof(ColumnAttribute);
@@ -37,11 +37,10 @@ namespace CCAIDemo.DataAccess
             string sql = "select * from [" + tableName + "] where [" + primaryKeyColumn + "]='" + primaryKeyValue + "'";
 
             SqlDataReader sdr = null;
-            SqlHelper sqlHelper = new SqlHelper();
             try
             {
-               
-                    sdr = sqlHelper.ExecuteReader(sql, CommandType.Text,tran);
+
+                sdr = SqlHelper.ExecuteReader(sql, CommandType.Text);
                
                 
                 if (sdr.Read())
@@ -63,30 +62,24 @@ namespace CCAIDemo.DataAccess
             }
             finally
             {
-                if (tran == null)
-                {
-                    sqlHelper.Close();
-                }
                 if (sdr != null && !sdr.IsClosed)
                 {
                     sdr.Close();
                 }
-
             }
-
 
             return entity;
         }
 
         /// <summary>
         /// 根据条件得到实体对象集合
-        /// 参数设置类似：queryCondition=" Name='abc' and Age=23";orderBy=" ID desc,Age asc"
+        /// 参数设置类似：queryCondition=" and Name='abc' and Age=23";orderBy=" ID desc,Age asc"
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="queryCondition"></param>
         /// <param name="tran"></param>
         /// <returns></returns>
-        public IList<T> GetEntitiesByQueryCondition(string queryCondition, string orderBy=null, Trans tran = null)
+        public IList<T> GetEntitiesByQueryCondition(string queryCondition, string orderBy=null)
         {
             IList<T> entityList = new List<T>();
 
@@ -107,7 +100,7 @@ namespace CCAIDemo.DataAccess
             }
             else
             {
-                sql = "select * from [" + tableName + "] where " + queryCondition;
+                sql = "select * from [" + tableName + "] where 1=1 " + queryCondition;
             }
             if (!string.IsNullOrEmpty(orderBy))
             {
@@ -115,13 +108,9 @@ namespace CCAIDemo.DataAccess
             }
 
             SqlDataReader sdr = null;
-            SqlHelper sqlHelper = new SqlHelper();
             try
             {
-
-                sdr = sqlHelper.ExecuteReader(sql, CommandType.Text, tran);
-
-
+                sdr = SqlHelper.ExecuteReader(sql, CommandType.Text);
                 while (sdr.Read())
                 {
                     T entity = Activator.CreateInstance<T>();
@@ -143,10 +132,6 @@ namespace CCAIDemo.DataAccess
             }
             finally
             {
-                if (tran == null)
-                {
-                    sqlHelper.Close();
-                }
                 if (sdr != null && !sdr.IsClosed)
                 {
                     sdr.Close();
@@ -157,14 +142,14 @@ namespace CCAIDemo.DataAccess
 
         /// <summary>
         /// 根据条件和分页条件得到实体对象集合
-        /// 参数设置类似：queryCondition=" Name='abc' and Age=23";orderBy=" ID desc,Age asc"
+        /// 参数设置类似：queryCondition=" and Name='abc' and Age=23";orderBy=" ID desc,Age asc"
         /// </summary>
         /// <param name="pageHelper"></param>
         /// <param name="queryCondition"></param>
         /// <param name="orderBy"></param>
         /// <param name="tran"></param>
         /// <returns></returns>
-        public IList<T> GetEntitiesByQueryConditionPaged(PageHelper pageHelper,string queryCondition, string orderBy=null,  Trans tran = null)
+        public IList<T> GetEntitiesByQueryConditionPaged(PageHelper pageHelper,string queryCondition, string orderBy=null)
         {
             IList<T> entityList = new List<T>();
 
@@ -210,14 +195,10 @@ namespace CCAIDemo.DataAccess
             }
 
             string sql = sqlRecord + ";" + sqlCount;
-            SqlDataReader sdr = null;
-            SqlHelper sqlHelper = new SqlHelper();
+            SqlDataReader sdr = null; 
             try
             {
-
-                sdr = sqlHelper.ExecuteReader(sql, CommandType.Text, tran);
-
-
+                sdr = SqlHelper.ExecuteReader(sql, CommandType.Text);
                 while (sdr.Read())
                 {
                     T entity = Activator.CreateInstance<T>();
@@ -246,10 +227,6 @@ namespace CCAIDemo.DataAccess
             }
             finally
             {
-                if (tran == null)
-                {
-                    sqlHelper.Close();
-                }
                 if (sdr != null && !sdr.IsClosed)
                 {
                     sdr.Close();
@@ -259,24 +236,38 @@ namespace CCAIDemo.DataAccess
         }
 
         /// <summary>
-        /// 保存实体对象
+        /// 保存实体对象，既可以插入也可以更新
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public int SaveEntity(T entity, Trans tran = null)
+        public int SaveEntity(T entity)
         {
-            if (entity == null)
+            string sql = GetSaveEntitySQL(entity);
+            if (sql == string.Empty)
                 return 0;
+
+            int rowCount = SqlHelper.ExecuteNonQuery(sql, CommandType.Text);
+            return rowCount;
+        }
+
+        /// <summary>
+        /// 得到保存实体对象的SQL，既可以插入也可以更新，主要用于事务中
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public String GetSaveEntitySQL(T entity)
+        {
+            string sql = string.Empty;
+            if (entity == null)
+                return sql;
 
             object[] tableAttributeArray = typeof(T).GetCustomAttributes(typeof(TableAttribute), false);
             if (tableAttributeArray.Length == 0)  //该实体类无表名，则返回0
-                return 0;
+                return sql;
             TableAttribute ta = tableAttributeArray[0] as TableAttribute;
             string tableName = ta.TableName;
             string primaryColumn = ta.PrimaryKeyColumn;
-
-            string sql = string.Empty;
 
             StringBuilder sbInsert = new StringBuilder();
             StringBuilder sbInsertParam = new StringBuilder();
@@ -323,10 +314,7 @@ namespace CCAIDemo.DataAccess
             sql += sbInsert.Remove(sbInsert.Length - 1, 1).ToString() + ") " + sbInsertParam.Remove(sbInsertParam.Length - 1, 1).ToString() + ")" + " end \r\t else\r\t begin \r\t "
                 + sbUpdate.Remove(sbUpdate.Length - 1, 1) + sbUpdateWhere + " \r\t end;";
 
-           
-            SqlHelper sqlHelper = new SqlHelper();
-            int rowCount = sqlHelper.ExecuteNonQuery(sql, CommandType.Text, tran);
-            return rowCount;
+            return sql;
         }
 
         /// <summary>
@@ -335,14 +323,31 @@ namespace CCAIDemo.DataAccess
         /// <typeparam name="T"></typeparam>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public int DeleteEntity(T entity, Trans tran = null)
+        public int DeleteEntity(T entity)
         {
-            if (entity == null)
+            String sql = GetDeleteEntitySQL(entity);
+            if (sql == string.Empty)
                 return 0;
+
+            int rowCount = SqlHelper.ExecuteNonQuery(sql, CommandType.Text);
+
+            return rowCount;
+        }
+
+        /// <summary>
+        /// 得到删除对象的SQL语句，主要用于事务中
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public String GetDeleteEntitySQL(T entity)
+        {
+            String sql = string.Empty;
+            if (entity == null)
+                return sql;
 
             object[] tableAttributeArray = typeof(T).GetCustomAttributes(typeof(TableAttribute), false);
             if (tableAttributeArray.Length == 0)
-                return 0;
+                return sql;
             TableAttribute ta = tableAttributeArray[0] as TableAttribute;
             string tableName = ta.TableName;
             string primaryColumn = ta.PrimaryKeyColumn;
@@ -357,12 +362,8 @@ namespace CCAIDemo.DataAccess
                     break;
                 }
             }
-            string sql = "delete from [" + tableName + "] where [" + primaryColumn + "]='" + primaryKeyValue + "'";
-
-            SqlHelper sqlHelper = new SqlHelper();
-            int rowCount = sqlHelper.ExecuteNonQuery(sql, CommandType.Text,tran);
-
-            return rowCount;
+            sql = "delete from [" + tableName + "] where [" + primaryColumn + "]='" + primaryKeyValue + "'";
+            return sql;
         }
 
         /// <summary>
@@ -372,57 +373,81 @@ namespace CCAIDemo.DataAccess
         /// <param name="primaryKeyValue"></param>
         /// <param name="tran"></param>
         /// <returns></returns>
-        public int DeleteEntityByPrimaryKey(string primaryKeyValue, Trans tran = null)
+        public int DeleteEntityByPrimaryKey(string primaryKeyValue)
         {
-            object[] tableAttributeArray = typeof(T).GetCustomAttributes(typeof(TableAttribute), false);
-            if (tableAttributeArray.Length == 0)
+            string sql = GetDeleteEntityByPrimaryKeySQL(primaryKeyValue);
+            if (sql == string.Empty)
                 return 0;
-            TableAttribute ta = tableAttributeArray[0] as TableAttribute;
-            string tableName = ta.TableName;
-            string primaryColumn = ta.PrimaryKeyColumn;
-            if (string.IsNullOrEmpty(primaryColumn))
-                return 0;
-
-            string sql = "delete from [" + tableName + "] where [" + primaryColumn + "]='" + primaryKeyValue + "'";
-
-            SqlHelper sqlHelper = new SqlHelper();
-            int rowCount = sqlHelper.ExecuteNonQuery(sql, CommandType.Text, tran);
+            int rowCount = SqlHelper.ExecuteNonQuery(sql, CommandType.Text);
 
             return rowCount;
         }
 
         /// <summary>
-        /// 根据条件删除实体对象
-        /// 参数设置类似：queryCondition=" Name='abc' and Age=23"; orderBy=" ID desc,Age asc"
+        /// 得到根据主键值来删除对象的SQL，用于事务中
         /// </summary>
-        /// <param name="queryCondition"></param>
-        /// <param name="tran"></param>
+        /// <param name="primaryKeyValue"></param>
         /// <returns></returns>
-        public int DeleteEntityByQueryCondition(string queryCondition, Trans tran = null)
+        public String GetDeleteEntityByPrimaryKeySQL(string primaryKeyValue)
         {
+            string sql = string.Empty;
             object[] tableAttributeArray = typeof(T).GetCustomAttributes(typeof(TableAttribute), false);
             if (tableAttributeArray.Length == 0)
-                return 0;
+                return sql;
             TableAttribute ta = tableAttributeArray[0] as TableAttribute;
             string tableName = ta.TableName;
             string primaryColumn = ta.PrimaryKeyColumn;
             if (string.IsNullOrEmpty(primaryColumn))
-                return 0;
+                return sql;
 
+            sql = "delete from [" + tableName + "] where [" + primaryColumn + "]='" + primaryKeyValue + "'";
+            return sql;
+        }
+
+        /// <summary>
+        /// 根据条件删除实体对象
+        /// 参数设置类似：queryCondition=" and Name='abc' and Age=23"; orderBy=" ID desc,Age asc"
+        /// </summary>
+        /// <param name="queryCondition"></param>
+        /// <param name="tran"></param>
+        /// <returns></returns>
+        public int DeleteEntityByQueryCondition(string queryCondition)
+        {
+            string sql = GetDeleteEntityByQueryConditionSQL(queryCondition);
+            if (sql == string.Empty)
+                return 0;
+            int rowCount = SqlHelper.ExecuteNonQuery(sql, CommandType.Text);
+
+            return rowCount;
+        }
+
+        /// <summary>
+        /// 得到根据条件删除实体对象的SQL，用于事务中
+        /// 参数设置类似：queryCondition=" and Name='abc' and Age=23"; orderBy=" ID desc,Age asc"
+        /// </summary>
+        /// <param name="queryCondition"></param>
+        /// <returns></returns>
+        public string GetDeleteEntityByQueryConditionSQL(string queryCondition)
+        {
             string sql = string.Empty;
+            object[] tableAttributeArray = typeof(T).GetCustomAttributes(typeof(TableAttribute), false);
+            if (tableAttributeArray.Length == 0)
+                return sql;
+            TableAttribute ta = tableAttributeArray[0] as TableAttribute;
+            string tableName = ta.TableName;
+            string primaryColumn = ta.PrimaryKeyColumn;
+            if (string.IsNullOrEmpty(primaryColumn))
+                return sql;
+
             if (string.IsNullOrEmpty(queryCondition))
             {
                 sql = "delete from [" + tableName + "]";
             }
             else
             {
-                sql = "delete from [" + tableName + "] where 1=1 and " + queryCondition;
+                sql = "delete from [" + tableName + "] where 1=1 " + queryCondition;
             }
-
-            SqlHelper sqlHelper = new SqlHelper();
-            int rowCount = sqlHelper.ExecuteNonQuery(sql, CommandType.Text, tran);
-
-            return rowCount;
+            return sql;
         }
 
         private ColumnAttribute GetColumnAttribute(PropertyInfo propInfo)
